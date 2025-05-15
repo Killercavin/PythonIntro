@@ -57,7 +57,7 @@ Hackathons are fast, chaotic, and brilliant — but most teams juggle between to
 
 We’re keeping the stack **open** during early development.
 
-Check out [`docs/tech-considerations.md`](docs/tech-considerations.md) and contribute ideas!
+Check out [`docs/TECH_CONSIDERATIONS.md`](docs/TECH_CONSIDERATIONS.md) and contribute ideas!
 
 > 📌 DevHatch is not just a product — it’s a collaborative experiment.
 
