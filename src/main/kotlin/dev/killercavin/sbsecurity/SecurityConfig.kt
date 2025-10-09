@@ -17,7 +17,13 @@ class SecurityConfig {
     fun securityFilterChain(httpSecurity: HttpSecurity): SecurityFilterChain {
         return httpSecurity
             .csrf { it.disable() }
+            .authorizeHttpRequests {
+                it.requestMatchers("/home/**", "/api/auth/**").permitAll()
+                it.requestMatchers("/api/dashboard/**").authenticated()
+                // it.anyRequest()
+            }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .httpBasic {}
             .build()
     }
 
