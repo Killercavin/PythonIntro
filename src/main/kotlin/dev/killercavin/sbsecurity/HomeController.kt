@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class HomeController {
     @GetMapping("/home")
-    fun home(): ResponseEntity<String> = ResponseEntity.status(HttpStatus.OK).body("Hello, Lynn is speaking...")
+    fun home(): ResponseEntity<String> = ResponseEntity.status(HttpStatus.OK).body("API is running...")
 }
