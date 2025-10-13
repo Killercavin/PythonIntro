@@ -33,7 +33,7 @@ class SecurityConfig {
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
-    fun authenticationManager(authenticationConfiguration: AuthenticationConfiguration): AuthenticationManager {
-        return authenticationConfiguration.authenticationManager
+    fun authenticationManager(authConfig: AuthenticationConfiguration): AuthenticationManager {
+        return authConfig.authenticationManager
     }
 }
