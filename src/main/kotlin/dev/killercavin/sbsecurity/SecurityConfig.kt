@@ -22,10 +22,11 @@ class SecurityConfig {
             .authorizeHttpRequests {
                 it.requestMatchers("/home/**", "/api/auth/**").permitAll()
                 it.requestMatchers("/api/dashboard/**").authenticated()
-                // it.anyRequest()
+                it.anyRequest().authenticated()
             }
-            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) }
             .httpBasic {}
+            .formLogin {  }
             .build()
     }
 
