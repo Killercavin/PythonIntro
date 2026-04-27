@@ -1,0 +1,25 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: mariadb-container
+    restart: always
+
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wattwise
+
+    ports:
+      - "3306:3306"
+
+    networks:
+      - wattwise-net
+
+    volumes:
+      - ./docker/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - mariadb-data:/var/lib/mariadb
+
+volumes:
+  mariadb-data:
+
+networks:
+  wattwise-net:
