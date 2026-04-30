@@ -29,4 +29,12 @@ public class UserService {
         log.info("User created {}", savedUser);
         return UserMapper.toDto(savedUser);
     }
+
+    public UserDto userById(Long id) {
+        return userRepository.findById(id).map(UserMapper::toDto).orElse(null);
+    }
+
+    public UserDto userByEmail(String email) {
+        return UserMapper.toDto(userRepository.findByEmail(email));
+    }
 }
