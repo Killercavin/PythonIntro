@@ -1,6 +1,6 @@
 CREATE TABLE `devices` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255),
+                            `id` BIGINT NOT NULL AUTO_INCREMENT,
+                            `name` VARCHAR(255),
     `type` VARCHAR(50),
     `location` VARCHAR(255),
     `user_id` BIGINT,
