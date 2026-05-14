@@ -1,5 +1,7 @@
 package io.github.devcavin.wattwise.deviceservice.entity
 
+import io.github.devcavin.wattwise.deviceservice.dto.DeviceRequest
+import io.github.devcavin.wattwise.deviceservice.dto.DeviceResponse
 import io.github.devcavin.wattwise.deviceservice.enums.DeviceType
 import jakarta.persistence.*
 import org.hibernate.Hibernate
@@ -35,5 +37,12 @@ class Device(
 
     override fun toString(): String {
         return "Device(id=$id, name='$name', type=$type, location='$location', userId=$userId)"
+    }
+
+    fun update(request: DeviceRequest) {
+        name = request.name
+        type = request.type
+        location = request.location
+        userId = request.userId
     }
 }
