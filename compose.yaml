@@ -18,6 +18,22 @@ services:
       - ./docker/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - mariadb-data:/var/lib/mariadb
 
+  kafka:
+    container_name: kafka
+    image: apache/kafka:latest
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_KRAFT_MODE: true
+      KAFKA_NODE_ID: 1
+      KAFKA_CLUSTER_ID: pZ3K9nZ7R9S8vGmXvQF2sA
+      KAFKA_PROCESS_ROLES: broker, controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092, 
+
 volumes:
   mariadb-data:
 
