@@ -1,4 +1,3 @@
-/*
 package io.github.devcavin.wattwise.ingestionservice.simulation;
 
 import io.github.devcavin.wattwise.ingestionservice.dto.EnergyUsageDto;
@@ -58,4 +57,3 @@ public class ContinuousDataSimulator implements CommandLineRunner {
         }
     }
 }
-*/
