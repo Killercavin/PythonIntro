@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ingestion-service
+  kafka:
+    bootstrap-servers: localhost:9094
+    template:
+      default-topic: wattwise-energy-usage
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8083
+
+simulation:
+  interval-ms: 1000
+  request-per-interval: 5000
+  parallel-threads: 5
