@@ -81,9 +81,30 @@ services:
     networks:
       - wattwise-net
 
+  influxdb:
+    container_name: influxdb
+    image: influxdb:2.7
+    ports:
+      - "8084:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: user
+      DOCKER_INFLUXDB_INIT_PASSWORD: secretpass
+      DOCKER_INFLUXDB_INIT_ORG: wattwise
+      DOCKER_INFLUXDB_INIT_BUCKET: usage-bucket
+      DOCKER_INFLUXDB_INIT_RETENTION: 1w
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: aY3K9nH7R0S8vGmXvQg2sG
+    
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+
+    networks:
+      - wattwise-net
+
 volumes:
   mariadb-data:
   kafka-data:
+  influxdb-data:
 
 networks:
   wattwise-net:
