@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: usage-service
+
+  kafka:
+    bootstrap-servers: http://localhost:9094
+    consumer:
+      group-id: wattwise-usage-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping:EnergyUsageEvent:io.github.devcavin.wattwise.kafka.event.EnergyUsageEvent
+
+server:
+  port: 8085
