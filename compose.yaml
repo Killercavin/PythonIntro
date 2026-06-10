@@ -93,7 +93,7 @@ services:
       DOCKER_INFLUXDB_INIT_ORG: wattwise
       DOCKER_INFLUXDB_INIT_BUCKET: usage-bucket
       DOCKER_INFLUXDB_INIT_RETENTION: 1w
-      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: aY3K9nH7R0S8vGmXvQg2sG
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: 25adWeaLpJBPBtcpyWUiLh4NyEzXbI7OeHg6qBqW9sc=
     
     volumes:
       - influxdb-data:/var/lib/influxdb2

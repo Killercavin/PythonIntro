@@ -16,3 +16,9 @@ spring:
 
 server:
   port: 8085
+
+influx:
+  url: http://localhost:8086
+  token: 25adWeaLpJBPBtcpyWUiLh4NyEzXbI7OeHg6qBqW9sc=
+  organization: wattwise
+  bucket: usage-bucket
