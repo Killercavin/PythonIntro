@@ -22,3 +22,7 @@ influx:
   token: 25adWeaLpJBPBtcpyWUiLh4NyEzXbI7OeHg6qBqW9sc=
   organization: wattwise
   bucket: usage-bucket
+
+device:
+  service:
+    url: ""

@@ -1,4 +1,4 @@
-package io.github.devcavin.usageservice.dto
+package io.github.devcavin.usageservice.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
