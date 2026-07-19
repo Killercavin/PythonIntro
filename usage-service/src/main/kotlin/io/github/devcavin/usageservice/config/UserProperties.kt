@@ -2,7 +2,7 @@ package io.github.devcavin.usageservice.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
-@ConfigurationProperties("device.service")
-data class DeviceProperties(
-    val deviceUrl: String
+@ConfigurationProperties("user.service")
+data class UserProperties(
+    val userUrl: String
 )

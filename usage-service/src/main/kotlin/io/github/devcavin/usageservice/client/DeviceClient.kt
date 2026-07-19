@@ -13,14 +13,14 @@ import org.springframework.web.util.UriComponentsBuilder
 @Component
 class DeviceClient(
     private val restTemplate: RestTemplate,
-    private val properties: DeviceProperties
+    private val deviceProperties: DeviceProperties
 ) {
     @Bean
     fun restTemplate(): RestTemplate = restTemplate
 
     fun getDeviceById(deviceId: Long): DeviceResponse {
         val url = UriComponentsBuilder
-            .fromUriString(properties.deviceUrl)
+            .fromUriString(deviceProperties.deviceUrl)
             .path("/{deviceId}")
             .buildAndExpand(deviceId)
         .toUriString()
