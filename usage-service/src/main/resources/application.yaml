@@ -14,15 +14,24 @@ spring:
             type:
               mapping:EnergyUsageEvent:io.github.devcavin.wattwise.kafka.event.EnergyUsageEvent
 
+    template:
+      default-topic: wattwise-energy-alert
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 server:
   port: 8085
 
 influx:
-  url: http://localhost:8086
-  token: 25adWeaLpJBPBtcpyWUiLh4NyEzXbI7OeHg6qBqW9sc=
-  organization: wattwise
-  bucket: usage-bucket
+  influx-url: http://localhost:8086
+  influx-token: 25adWeaLpJBPBtcpyWUiLh4NyEzXbI7OeHg6qBqW9sc=
+  influx-organization: wattwise
+  influx-bucket: usage-bucket
 
 device:
   service:
-    url: ""
+    device-url: http://localhost:8081/api/v1/devices
+user:
+  service:
+    user-url: http://localhost:8080/api/v1/users
