@@ -7,7 +7,6 @@ public record EnergyUsageEvent(
         double energyConsumed,
         Instant createdAt
 ) {
-
     public EnergyUsageEvent(Long deviceId, double energyConsumed) {
         this(deviceId, energyConsumed, Instant.now());
     }

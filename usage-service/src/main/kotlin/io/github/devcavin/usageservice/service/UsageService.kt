@@ -8,7 +8,6 @@ import com.influxdb.query.FluxTable
 import io.github.devcavin.kafka.event.AlertingEvent
 import io.github.devcavin.kafka.event.EnergyUsageEvent
 import io.github.devcavin.usageservice.client.DeviceClient
-import io.github.devcavin.usageservice.client.UserClient
 import io.github.devcavin.usageservice.config.InfluxProperties
 import io.github.devcavin.usageservice.dto.UserConsumption
 import io.github.devcavin.usageservice.model.DeviceEnergy
@@ -24,7 +23,6 @@ class UsageService(
     private val influxDBClient: InfluxDBClient,
     private val properties: InfluxProperties,
     private val deviceClient: DeviceClient,
-    private val userClient: UserClient,
     private val kafkaTemplate: KafkaTemplate<String, AlertingEvent>
 ) {
     private val log = LoggerFactory.getLogger(UsageService::class.java)
