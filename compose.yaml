@@ -101,10 +101,23 @@ services:
     networks:
       - wattwise-net
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    volumes:
+      - mailpit-data:/var/lib/mailpit/data
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - wattwise-net
+
 volumes:
   mariadb-data:
   kafka-data:
   influxdb-data:
+  mailpit-data:
 
 networks:
   wattwise-net:

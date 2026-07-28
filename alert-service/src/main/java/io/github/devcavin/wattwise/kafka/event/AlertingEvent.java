@@ -13,6 +13,6 @@ public class AlertingEvent {
     private Long userId;
     private String message;
     private double threshold;
-    private double energyConfused;
+    private double energyConsumed;
     private String email;
 }
