@@ -5,5 +5,6 @@ data class DeviceResponse(
     val name: String,
     val location: String,
     val type: String,
-    val userId: Long
+    val userId: Long,
+    var energyConsumed: Double
 )
