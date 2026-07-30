@@ -38,7 +38,7 @@ class DeviceService(private val deviceRepository: DeviceRepository) {
         deviceRepository.deleteById(id)
     }
 
-    fun getDevicesByUser(userId: Long): List<DeviceResponse> {
+    fun getAllDevicesByUser(userId: Long): List<DeviceResponse> {
         return deviceRepository.findByUserId(userId)
             .map { it.toDeviceResponse() }
     }

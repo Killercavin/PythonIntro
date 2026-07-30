@@ -51,7 +51,7 @@ class DeviceController(private val deviceService: DeviceService) {
     }
 
     @GetMapping("/user/{userId}")
-    fun getDevicesByUser(@PathVariable userId: Long): ResponseEntity<List<DeviceResponse>> {
-        return ResponseEntity.ok(deviceService.getDevicesByUser(userId))
+    fun getAllDevicesByUser(@PathVariable userId: Long): ResponseEntity<List<DeviceResponse>> {
+        return ResponseEntity.ok(deviceService.getAllDevicesByUser(userId))
     }
 }
