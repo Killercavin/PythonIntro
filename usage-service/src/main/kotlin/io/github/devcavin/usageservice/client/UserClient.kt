@@ -1,6 +1,6 @@
 package io.github.devcavin.usageservice.client
 
-import io.github.devcavin.usageservice.config.UserProperties
+import io.github.devcavin.usageservice.config.UsageAppProperties
 import io.github.devcavin.usageservice.dto.UserResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClientException
@@ -11,10 +11,10 @@ import org.springframework.web.util.UriComponentsBuilder
 @Component
 class UserClient(
     private val restTemplate: RestTemplate,
-    private val userProperties: UserProperties
+    private val properties: UsageAppProperties
 ) {
     fun getUserById(userId: Long): UserResponse {
-        val url = UriComponentsBuilder.fromUriString(userProperties.userUrl)
+        val url = UriComponentsBuilder.fromUriString(properties.userUrl)
             .path("/{userId}")
         .buildAndExpand(userId)
             .toUriString()

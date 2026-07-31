@@ -1,15 +1,13 @@
 package io.github.devcavin.usageservice
 
-import io.github.devcavin.usageservice.config.DeviceProperties
-import io.github.devcavin.usageservice.config.InfluxProperties
-import io.github.devcavin.usageservice.config.UserProperties
+import io.github.devcavin.usageservice.config.UsageAppProperties
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
-@EnableConfigurationProperties(InfluxProperties::class, DeviceProperties::class, UserProperties::class)
+@EnableConfigurationProperties(UsageAppProperties::class)
 @EnableScheduling
 class UsageServiceApplication
 
