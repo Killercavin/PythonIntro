@@ -1,2 +1,4 @@
 CREATE DATABASE IF NOT EXISTS wattwise;
+CREATE DATABASE IF NOT EXISTS keycloak;
 USE wattwise;
+USE keycloak;

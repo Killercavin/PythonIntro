@@ -3,81 +3,63 @@ services:
     image: mariadb:11.4
     container_name: mariadb-container
     restart: always
-
     environment:
       MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: wattwise
-
+      MARIADB_DATABASE: wattwise  # Default database
     ports:
       - "3306:3306"
-
     networks:
       - wattwise-net
-
     volumes:
       - ./docker/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   kafka:
     container_name: kafka
     image: apache/kafka:latest
-
     ports:
       - "9092:9092"
       - "9094:9094"
-
     environment:
       KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 1
       KAFKA_CLUSTER_ID: pZ3K9nZ7R9S8vGmXvQF2sA
-
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-
-      # listeners inside container
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094,CONTROLLER://0.0.0.0:9093
-
-      # what clients see
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
-
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
-
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_NUM_PARTITIONS: 1
-
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
-
     volumes:
       - kafka-data:/var/lib/kafka/data
-
     networks:
       - wattwise-net
 
   kafka-ui:
     container_name: kafka-ui
     image: ghcr.io/kafbat/kafka-ui:latest
-
     ports:
       - "8082:8080"
-
     depends_on:
       - kafka
-
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
       DYNAMIC_CONFIG_ENABLED: "true"
-
     restart: unless-stopped
-
     networks:
       - wattwise-net
 
@@ -94,10 +76,8 @@ services:
       DOCKER_INFLUXDB_INIT_BUCKET: usage-bucket
       DOCKER_INFLUXDB_INIT_RETENTION: 1w
       DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: 25adWeaLpJBPBtcpyWUiLh4NyEzXbI7OeHg6qBqW9sc=
-    
     volumes:
       - influxdb-data:/var/lib/influxdb2
-
     networks:
       - wattwise-net
 
@@ -110,6 +90,33 @@ services:
     ports:
       - "8025:8025"
       - "1025:1025"
+    networks:
+      - wattwise-net
+
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.1
+    restart: unless-stopped
+    command: ["start-dev", "--import-realm"]
+    environment:
+      # Use the same MariaDB instance
+      KC_DB: mariadb
+      KC_DB_URL_HOST: mariadb  # Points to the main mariadb service
+      KC_DB_URL_PORT: 3306
+      KC_DB_DATABASE: keycloak  # Keycloak uses its own database
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: root
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+    ports:
+      - "8089:8080"
+    volumes:
+      - ./docker/keycloak/realms/:/opt/keycloak/data/import/
+    depends_on:
+      mariadb:
+        condition: service_healthy
     networks:
       - wattwise-net
 
